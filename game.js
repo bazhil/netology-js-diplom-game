@@ -187,10 +187,7 @@ class LevelParser {
       if (!(symb && this.obj)) {return undefined};
       return this.obj[symb];
     }
-    // obstacleFromSymbol(symb) {
-    //   if (!sign) return undefined;
-    //   return symbolObstacle[sign];    
-    // }
+
     obstacleFromSymbol(symb) {
         switch (symb) {
             case 'x' : return 'wall';
