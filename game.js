@@ -154,7 +154,7 @@ class Level {
     }
     // Определяет, остались ли еще объекты переданного типа на игровом поле
     noMoreActors(type) {
-        return this.actors.includes(type);
+        return this.actors.findIndex(el => el.type === type) === -1;
     }
     // Меняет состояние игрового поля при касании игроком каких-либо объектов или препятствий.
     playerTouched(type, actor) {
