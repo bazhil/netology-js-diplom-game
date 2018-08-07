@@ -187,9 +187,16 @@ class LevelParser {
       if (!(symb && this.obj)) {return undefined};
       return this.obj[symb];
     }
+    // obstacleFromSymbol(symb) {
+    //   if (!sign) return undefined;
+    //   return symbolObstacle[sign];    
+    // }
     obstacleFromSymbol(symb) {
-      if (!sign) return undefined;
-      return symbolObstacle[sign];    
+        switch (symb) {
+            case 'x' : return 'wall';
+            case '!' : return 'lava';
+            default : return undefined;
+        }
     }
     // Принимает массив строк и преобразует его в массив массивов, в ячейках которого хранится либо строка, соответствующая препятствию, либо undefined.
     createGrid(plan) {
@@ -335,3 +342,5 @@ loadLevels()
   .then(() => alert('Вы выиграли!'))
   .catch(err => alert(err)); 
 });
+
+
