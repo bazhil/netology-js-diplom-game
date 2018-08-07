@@ -23,8 +23,8 @@ class Vector {
 //класс Actor контролирует все движущиеся объекты на игровом поле и их пересечение
 class Actor {
     constructor(position, size, speed) {
-        if (!pos) {
-            pos = new Vector(0, 0);
+        if (!position) {
+            position = new Vector(0, 0);
         }
         if (!size) {
             size = new Vector(1, 1);
@@ -121,10 +121,10 @@ class Level {
             throw new Error('Ошибка: Должен быть передан объект типа Vector.');
         }
         // Считаем, что игровое поле слева, сверху и справа огорожено стеной и снизу у него смертельная лава.
-        const leftObstacle = Math.floor(position.x);
-        const rightObstacle = Math.ceil(position.x + size.x);
-        const topObstacle = Math.floor(position.y);
-        const bottomObstacle = Math.ceil(position.y + size.y);
+        const leftObstacle = Math.floor(position.x),
+              rightObstacle = Math.ceil(position.x + size.x),
+              topObstacle = Math.floor(position.y),
+              bottomObstacle = Math.ceil(position.y + size.y);
         // Если описанная двумя векторами область выходит за пределы игрового поля, то вернет wall
         if (leftObstacle < 0 
             || rightObstacle > this.width 
@@ -284,8 +284,8 @@ class FireRain extends Fireball {
 
 // Монета
 class Coin extends Actor {
-    constructor(pos = new Vector(0, 0)) {
-        super(pos.plus(new Vector(0.2, 0.1)), new Vector(0.6, 0.6));
+    constructor(position = new Vector(0, 0)) {
+        super(position.plus(new Vector(0.2, 0.1)), new Vector(0.6, 0.6));
         this.spring = Math.random() * (Math.PI * 2);
         this.springSpeed = 8;
         this.springDist = 0.07;
@@ -331,7 +331,7 @@ const actorDict = {
 const parser = new LevelParser(actorDict);
 
 loadLevels()
-  .then((res) => {
-    runGame(JSON.parse(res), parser, DOMDisplay)
-      .then(() => alert('Вы выиграли!'))
-  });
+  .then((res) => {runGame(JSON.parse(res), parser, DOMDisplay)
+  .then(() => alert('Вы выиграли!'))
+  .catch(err => alert(err)); 
+});
